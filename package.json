@@ -1,0 +1,27 @@
+{
+  "name": "oauth2_node",
+  "version": "0.0.0",
+  "description": "facebook_oauth",
+  "main": "facebook_auth_server.js",
+  "dependencies": {
+    "nconf": "~0.6.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crimsonalucard/oauth2_node.git"
+  },
+  "keywords": [
+    "facebook",
+    "oauth"
+  ],
+  "author": "Brian Yeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crimsonalucard/oauth2_node/issues"
+  },
+  "homepage": "https://github.com/crimsonalucard/oauth2_node"
+}
