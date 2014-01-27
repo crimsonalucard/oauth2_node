@@ -9,14 +9,16 @@
 //console.log('Server running on port 1337');
 var nconf = require('nconf');
 nconf.argv().file({file:"config.json"});
+
 var auth_url = "https://graph.facebook.com/oauth/authorize?";
 var random_id =  makeid(12);
 var params = {
-    client_id:"",
+    client_id: nconf.get("client_id"),
     state: random_id,
-    redirect_uri: encodeURIComponent(""),
-    scope:"",
-    response_type:"code" //can be "code" or "token", code is used for server side auth, while token is client...
+    redirect_uri: encodeURIComponent(nconf.get("redirect_uri")),
+    scope: nconf.get("scope"),
+    display: nconf.get("display"),
+    response_type:nconf.get("response_type")//can be "code" or "token", code is used for server side auth, while token is client...
 };
 
 console.log(constructurl(auth_url, params));
