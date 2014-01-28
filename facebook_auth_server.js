@@ -24,12 +24,27 @@ var facebook_params = {
 };
 
 http.createServer(function (request, response) {
+    if (request.url === "/favicon.ico") {
+        //ignore icon requests from browser...
+        response.writeHead(400);
+        response.end();
+        return;
+    }
+
     //get GET query parameters
     var get_parameters = querystring.parse(request.url.slice(2));
     for (var key in get_parameters) {
         facebook_params[key] = get_parameters[key];
     }
-    console.log(facebook_params);
+
+    console.log(request.url);
+    //console.log(facebook_params);
+    var url = constructurl(auth_url, facebook_params);
+    response.writeHead(200, {
+        'Content-Length': url.length,
+        'Content-Type': 'text/plain' });
+    response.write(url);
+    response.end();
 }).listen(1337);
 
 
