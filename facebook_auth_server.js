@@ -45,7 +45,7 @@ http.createServer(function (request, response) {
         'Content-Type': 'text/plain' });
     response.write(url);
     response.end();
-}).listen(1337);
+}).listen(process.env.PORT);
 
 
 function makeid(length)
