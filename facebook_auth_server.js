@@ -7,12 +7,14 @@
 //  res.end('Hello World\n');
 //}).listen(1337);
 //console.log('Server running on port 1337');
+var http = require('http');
 var nconf = require('nconf');
+var querystring = require('querystring');
 nconf.argv().file({file:"config.json"});
 
 var auth_url = "https://graph.facebook.com/oauth/authorize?";
 var random_id =  makeid(12);
-var params = {
+var facebook_params = {
     client_id: nconf.get("client_id"),
     state: random_id,
     redirect_uri: encodeURIComponent(nconf.get("redirect_uri")),
@@ -21,7 +23,15 @@ var params = {
     response_type:nconf.get("response_type")//can be "code" or "token", code is used for server side auth, while token is client...
 };
 
-console.log(constructurl(auth_url, params));
+http.createServer(function (request, response) {
+    //get GET query parameters
+    var get_parameters = querystring.parse(request.url.slice(2));
+    for (var key in get_parameters) {
+        facebook_params[key] = get_parameters[key];
+    }
+    console.log(facebook_params);
+}).listen(1337);
+
 
 function makeid(length)
 {
