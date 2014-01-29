@@ -11,7 +11,7 @@ var http = require('http');
 var nconf = require('nconf');
 var querystring = require('querystring');
 nconf.argv().file({file:"config.json"});
-
+var port = process.platform === 'darwin' ? 1337 : process.env.PORT;
 var auth_url = "https://graph.facebook.com/oauth/authorize?";
 var random_id =  makeid(12);
 var facebook_params = {
@@ -45,7 +45,8 @@ http.createServer(function (request, response) {
         'Content-Type': 'text/plain' });
     response.write(url);
     response.end();
-}).listen(process.env.PORT);
+}).listen(port);
+console.log("port: ", port);
 
 
 function makeid(length)
